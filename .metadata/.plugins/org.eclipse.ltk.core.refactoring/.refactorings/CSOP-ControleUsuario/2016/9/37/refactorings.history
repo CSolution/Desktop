@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;br.com.onpecas.view.CSOP&apos; to &apos;CSOPControllerUsers&apos;&#x0D;&#x0A;- Original project: &apos;CSOP-ControleUsuario&apos;&#x0D;&#x0A;- Original element: &apos;br.com.onpecas.view.CSOP&apos;&#x0D;&#x0A;- Renamed element: &apos;br.com.onpecas.view.CSOPControllerUsers&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;CSOP&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;br.com.onpecas.view{CSOP.java[CSOP" matchStrategy="1" name="CSOPControllerUsers" qualified="false" references="true" similarDeclarations="false" stamp="1473102135522" textual="false" version="1.0"/>
+</session>
