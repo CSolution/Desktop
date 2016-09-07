@@ -1,0 +1,29 @@
+package br.com.onpecas.model;
+
+public class Grupo {
+
+	private int oid_grupo;
+	private String nome;
+	private String decricacao;
+
+	public int getOid_grupo() {
+		return oid_grupo;
+	}
+	public void setOid_grupo(int oid_grupo) {
+		this.oid_grupo = oid_grupo;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getDecricacao() {
+		return decricacao;
+	}
+	public void setDecricacao(String decricacao) {
+		this.decricacao = decricacao;
+	}
+
+
+}
