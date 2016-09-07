@@ -26,14 +26,25 @@ public class UsuariosGruposController implements Initializable{
 	@FXML TableView<Grupo> tblGroup;
 	@FXML TableColumn<Grupo, String> clnGroupNome, clnGroupObservacao;
 
+	@FXML ComboBox<Grupo> cboGrupo;
+
+	@FXML TableView<Usuario> tblUser;
+	@FXML TableColumn<Usuario, String> clnUserNome, clnUserLogin, clnUserGrupo;
+
 	CSOPControllerUsers csop;
+	List<Grupo> lstGrupo;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		csop = new CSOPControllerUsers();
-		AtribuirBotoes();
+		lstGrupo = new ArrayList<>();
 
+		AtribuirBotoes();
 		AtualizarTblGroup();
+		AtualizarTblUser();
+
+		cboGrupo.getItems().addAll(lstGrupo);
 	}
 
 	public void InsertGroup(){
@@ -44,7 +55,7 @@ public class UsuariosGruposController implements Initializable{
 		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
 
 		int result = JOptionPane.showConfirmDialog(null,"Deseja Excluir ? ","Excluir",JOptionPane.YES_NO_CANCEL_OPTION);
-			
+
         if(result ==JOptionPane.YES_OPTION){
         	if(grupo != null){
         		Grupo.Delete(grupo);
@@ -53,8 +64,6 @@ public class UsuariosGruposController implements Initializable{
     			Alerta.showError("Erro", "Nenhum grupo selecionado");
     		}
         }
-		
-		
 	}
 	public void UpdateGroup(){
 		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
@@ -62,25 +71,64 @@ public class UsuariosGruposController implements Initializable{
 		if(grupo != null){
 			csop.LoadGroup(grupo);
 		}else{
-			Alerta.showError("Erro", "Selecione um grupo.");
+			Alerta.showError("Erro", "Selecione um usuario.");
 		}
 	}
 
+	public void InsertUser(){
+		csop.LoadUser(null);
+	}
+
+	public void DeleteUser(){
+		Usuario usuario = tblUser.getSelectionModel().getSelectedItem();
+
+		int result = JOptionPane.showConfirmDialog(null,"Deseja Excluir ? ","Excluir",JOptionPane.YES_NO_CANCEL_OPTION);
+
+        if(result ==JOptionPane.YES_OPTION){
+        	if(usuario != null){
+        		Usuario.Delete(usuario);
+        		AtualizarTblUser();
+        	}else{
+    			Alerta.showError("Erro", "Nenhum usuario selecionado");
+    		}
+        }
+	}
+	public void UpdateUser(){
+		Usuario usuario = tblUser.getSelectionModel().getSelectedItem();
+
+		if(usuario != null){
+			csop.LoadUser(usuario);
+		}else{
+			Alerta.showError("Erro", "Selecione um usuario.");
+		}
+	}
 	public void AtribuirBotoes(){
 		btnGroupInsert.setOnAction(l-> InsertGroup());
 		btnGroupEdit.setOnAction(l-> UpdateGroup());
 		btnGroupDelete.setOnAction(l-> DeleteGroup());
+
+		btnUserInsert.setOnAction(l-> InsertUser());
+		btnUserEdit.setOnAction(l-> UpdateUser());
+		btnUserDelete.setOnAction(l-> DeleteUser());
+
 	}
 
 	public void AtualizarTblGroup(){
 		clnGroupNome.setCellValueFactory(new PropertyValueFactory<Grupo, String>("nome"));
 		clnGroupObservacao.setCellValueFactory(new PropertyValueFactory<Grupo, String>("descricao"));
 
-		List<Grupo> lstGrupo = new ArrayList<>();
-
 		lstGrupo = Grupo.Select();
 		ObservableList<Grupo> data = FXCollections.observableList(lstGrupo);
         tblGroup.setItems(data);
+	}
+	public void AtualizarTblUser(){
+		clnUserNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomecompleto"));
+		clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));
+		clnUserGrupo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeGrupo"));
+
+		List<Usuario> lstGrupo = Usuario.Select();
+		ObservableList<Usuario> data = FXCollections.observableList(lstGrupo);
+        tblUser.setItems(data);
 	}
 
 }

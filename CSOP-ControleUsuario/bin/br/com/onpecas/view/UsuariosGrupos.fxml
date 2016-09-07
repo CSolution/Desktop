@@ -27,11 +27,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TableView layoutX="7.0" layoutY="232.0" prefHeight="275.0" prefWidth="986.0" AnchorPane.bottomAnchor="293.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="232.0">
+            <TableView fx:id="tblUser" layoutX="7.0" layoutY="232.0" prefHeight="275.0" prefWidth="986.0" AnchorPane.bottomAnchor="293.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="232.0">
                <columns>
-                  <TableColumn prefWidth="419.0" resizable="false" text="Nome do usuário" />
-                  <TableColumn prefWidth="259.0" resizable="false" text="Login do Usuário" />
-                  <TableColumn prefWidth="301.0" resizable="false" text="Grupo" />
+                  <TableColumn fx:id="clnUserNome" prefWidth="419.0" resizable="false" text="Nome do usuário" />
+                  <TableColumn fx:id="clnUserLogin" prefWidth="259.0" resizable="false" text="Login do Usuário" />
+                  <TableColumn fx:id="clnUserGrupo" prefWidth="301.0" resizable="false" text="Grupo" />
                </columns>
             </TableView>
             <Button fx:id="btnFiltrar" layoutX="897.0" layoutY="145.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="108.0" text="FILTRAR" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="145.0">
@@ -84,7 +84,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <ComboBox layoutX="205.0" layoutY="50.0" prefHeight="25.0" prefWidth="373.0" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="50.0">
+            <ComboBox fx:id="cboGrupo" layoutX="205.0" layoutY="50.0" prefHeight="25.0" prefWidth="373.0" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="50.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

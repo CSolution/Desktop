@@ -47,13 +47,20 @@ public class CSOPControllerUsers extends Application {
 		border.setCenter(module);
 	}
 
-	public void LoadUser(){
+	public void LoadUser(Usuario usuario){
 
 		Stage secondStage = new Stage();
 
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("UsuarioCRUD.fxml"));
-        loader.setController(new UserController());
+
+        if(usuario == null){
+
+	        loader.setController(new UserController(secondStage));
+		}else{
+
+	        loader.setController(new UserController(secondStage, usuario));
+		}
 
 		AnchorPane module;
 		try {

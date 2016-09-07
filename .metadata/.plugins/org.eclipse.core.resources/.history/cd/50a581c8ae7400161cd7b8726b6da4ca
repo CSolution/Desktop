@@ -1,0 +1,106 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.model.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+public class UserController implements Initializable{
+
+	@FXML TextField txtNomeCompleto, txtLogin, txtEmail;
+
+	@FXML ComboBox<Grupo> cboGrupo;
+
+	@FXML PasswordField txtSenha;
+
+	@FXML Button btnCadastrar, btnCancelar;
+
+	Stage myStage;
+	Usuario usuario;
+
+	static int OID_USUARIOAUXILIO;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		OID_USUARIOAUXILIO = 0;
+		AtribuirBotoes();
+
+		//Foi criado um objeto do tipo grupo, caso ele seja nulo,
+		//quer dizer que a instancia oi feita pelo primeiro modo
+		if(usuario != null){
+			PrepararUpdate(usuario);
+		}
+	}
+	public UserController(Stage myStage) {
+		// TODO Auto-generated constructor stub
+	}
+	public UserController(Stage myStage, Usuario usuario) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void InserirAtualizarGrupo(){
+		String nomeCompleto = txtNomeCompleto.getText();
+		String login = txtLogin.getText();
+		String email = txtEmail.getText();
+		String senha = txtSenha.getText();
+		Grupo grupo = cboGrupo.getSelectionModel().getSelectedItem();
+
+		int oid_grupo = OID_USUARIOAUXILIO;
+
+		switch (btnCadastrar.getText()){
+			case "Cadastrar":
+				if(!login.isEmpty() && !senha.isEmpty()){
+					if(grupo != null){
+						Usuario usuario = new Usuario();
+
+						usuario.setNome(nome);
+						usuario.setDescricao(descricao);
+
+						Grupo.Insert(grupo);
+
+						myStage.close();
+					}else{
+						Alerta.showError("Não é possível cadastrar", "O usuario precisa de um grupo.");
+					}
+
+				}else{
+					Alerta.showError("Não é possível cadastrar", "O usuario precisa de pelo menos login e senha.");
+				}
+
+				break;
+			case "Atualizar":
+				if(!nome.isEmpty()){
+					Grupo grupo = new Grupo();
+
+					grupo.setNome(nome);
+					grupo.setDescricao(descricao);
+					grupo.setOid_grupo(oid_grupo);
+
+					Grupo.Update(grupo);
+
+					myStage.close();
+
+				}else{
+					Alerta.showError("Não é possível criar o grupo", "O grupo precisa de um nome para ser atualizado.");
+				}
+				break;
+		}
+
+	}
+
+	public void PrepararUpdate(Grupo grupo){
+
+		txtNome.setText(grupo.getNome());
+		txtDescricao.setText(grupo.getDescricao());
+		OID_GRUPOAUXILIO = grupo.getOid_grupo();
+
+		System.out.println(OID_GRUPOAUXILIO);
+
+		this.btnCadastrar.setText("Atualizar");
+	}
+}

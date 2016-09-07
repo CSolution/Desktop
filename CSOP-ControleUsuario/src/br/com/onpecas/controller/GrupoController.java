@@ -109,8 +109,6 @@ public class GrupoController implements Initializable {
 		txtDescricao.setText(grupo.getDescricao());
 		OID_GRUPOAUXILIO = grupo.getOid_grupo();
 
-		System.out.println(OID_GRUPOAUXILIO);
-
 		this.btnCadastrarGrupo.setText("Atualizar");
 	}
 }

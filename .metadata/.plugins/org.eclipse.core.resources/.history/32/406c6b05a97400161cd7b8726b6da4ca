@@ -1,0 +1,161 @@
+package br.com.onpecas.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.MySqlConnect;
+
+public class Usuario {
+
+	private int oid_usuario;
+	private int oid_grupo;
+	private String nome;
+	private String login;
+	private String senha;
+	private String email;
+
+	public int getOid_usuario() {
+		return oid_usuario;
+	}
+	public void setOid_usuario(int oid_usuario) {
+		this.oid_usuario = oid_usuario;
+	}
+	public int getOid_grupo() {
+		return oid_grupo;
+	}
+	public void setOid_grupo(int oid_grupo) {
+		this.oid_grupo = oid_grupo;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public static void Insert(Usuario usuario){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="insert into usuariosistema (nomecompleto, email, login, senha, oid_grupo) values(?, ?, ?, ?, ?);";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+			parametros.setString(1, usuario.getNome());
+			parametros.setString(2, usuario.getEmail());
+			parametros.setString(3, usuario.getLogin());
+			parametros.setString(4, usuario.getSenha());
+			parametros.setInt(5, usuario.getOid_grupo());
+
+			parametros.executeUpdate();
+			con.close();
+
+			Alerta.showInformation("sucesso", "Inserido com sucesso");
+			//limpar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+	}
+	public static List<Usuario> Select(){
+		Connection con = MySqlConnect.ConectarDb();
+
+		List<Usuario> lstUsuario = new ArrayList<>();
+		String sql = "select * from usuariosistema;";
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+
+			while(rs.next()){
+
+				Usuario usuario = new Usuario();
+				usuario.setNome(rs.getString("nomecompleto"));
+				usuario.setDescricao(rs.getString("descricao"));
+				usuario.setOid_grupo(rs.getInt("oid_grupo"));
+
+				lstUsuario.add(usuario);
+			}
+
+			con.close();
+			return lstGrupo;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public static void SelectSearch(Usuario usuario){}
+	public static void Delete(Usuario usuario){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="delete from grupousuario where oid_grupo = ?;";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+			parametros.setInt(1, grupo.getOid_grupo());
+
+			parametros.executeUpdate();
+			con.close();
+
+			Alerta.showInformation("sucesso", "Deletado com sucesso");
+			//limpar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+	}
+	public static void Update(Usuario usuario){
+		Connection con = MySqlConnect.ConectarDb();
+
+		String sql ="update grupousuario set nome = ?, descricao = ? where oid_grupo = ?;";
+
+		PreparedStatement parametros;
+
+		try {
+			parametros = con.prepareStatement(sql);
+			parametros.setString(1, grupo.getNome());
+			parametros.setString(2, grupo.getDescricao());
+			parametros.setInt(3, grupo.getOid_grupo());
+
+			parametros.executeUpdate();
+			con.close();
+
+			Alerta.showInformation("sucesso", "Atualizado com sucesso");
+			//limpar();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+		}
+
+	}
+}

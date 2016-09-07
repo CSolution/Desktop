@@ -1,0 +1,34 @@
+package br.com.onpecas.controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import br.com.onpecas.model.*;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+public class UserController implements Initializable{
+
+	@FXML TextField txtNomeCompleto, txtLogin, txtEmail;
+	@FXML ComboBox<Grupo> cboGrupo;
+	@FXML PasswordField txtSenha;
+
+	Stage myStage;
+	Usuario usuario;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+
+	}
+	public UserController(Stage myStage) {
+		// TODO Auto-generated constructor stub
+	}
+	public UserController(Stage myStage, Usuario usuario) {
+		// TODO Auto-generated constructor stub
+	}
+}

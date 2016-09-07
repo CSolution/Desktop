@@ -3,3 +3,5 @@
 1473200694455	Rename resource 'Usuarios e grupos - Inicial.fxml'
 1473203056435	Rename resource 'GrupoInicial.fxml'
 1473203090414	Rename resource 'UsuariosCRUD.fxml'
+1473218529240	Encapsulate field 'grupo'
+1473219039486	Encapsulate field 'nomeGrupo'
