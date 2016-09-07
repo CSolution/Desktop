@@ -45,10 +45,10 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TableView layoutX="7.0" layoutY="569.0" prefHeight="214.0" prefWidth="986.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
+            <TableView fx:id="tblGroup" layoutX="7.0" layoutY="569.0" prefHeight="214.0" prefWidth="986.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0">
                <columns>
-                  <TableColumn prefWidth="444.0" resizable="false" text="Nome do Grupo" />
-                  <TableColumn prefWidth="534.0" resizable="false" text="Observações" />
+                  <TableColumn fx:id="clnGroupNome" prefWidth="444.0" resizable="false" text="Nome do Grupo" />
+                  <TableColumn fx:id="clnGroupObservacao" prefWidth="534.0" resizable="false" text="Descrição" />
                </columns>
             </TableView>
             <Separator layoutY="549.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />

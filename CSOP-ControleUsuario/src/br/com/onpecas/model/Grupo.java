@@ -16,6 +16,11 @@ public class Grupo {
 	private String nome;
 	private String descricao;
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return nome;
+	}
 	public int getOid_grupo() {
 		return oid_grupo;
 	}

@@ -2,7 +2,6 @@ package br.com.onpecas.helper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class MySqlConnect {
 
@@ -19,7 +18,7 @@ public class MySqlConnect {
 
 		} catch (Exception ex) {
 			// TODO Auto-generated catch block
-			System.out.println("SQLException: " + ex.getMessage());
+			ex.getMessage();
 		}
 
 		return con;
