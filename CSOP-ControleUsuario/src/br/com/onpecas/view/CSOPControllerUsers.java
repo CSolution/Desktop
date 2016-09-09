@@ -82,6 +82,27 @@ public class CSOPControllerUsers extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public void LoadPermission(){
+
+		Stage secondStage = new Stage();
+
+		FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Permissoes.fxml"));
+
+	    loader.setController(new PermissaoController()); 
+		try {
+			ScrollPane module= (ScrollPane) loader.load();
+			
+			Scene scene = new Scene(module);
+
+			secondStage.setScene(scene);
+			secondStage.show();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	/*Esse método serve para carregar a tela que insere e atualiza grupo
 	 * Ela recebe um objeto do tipo grupo,

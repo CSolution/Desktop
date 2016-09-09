@@ -89,6 +89,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ComboBox>
+            <Button fx:id="btnGroupPermission" layoutX="141.0" layoutY="530.0" mnemonicParsing="false" text="Permissões" />
          </children>
       </AnchorPane>
    </content>
