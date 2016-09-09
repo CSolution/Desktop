@@ -21,7 +21,7 @@ public class UsuariosGruposController implements Initializable{
 
 	@FXML Button btnUserInsert, btnUserDelete, btnUserEdit;
 	@FXML Button btnGroupInsert, btnGroupDelete, btnGroupEdit;
-	@FXML Button btnFiltrar, btnPermissoes;
+	@FXML Button btnFiltrar;
 
 	@FXML TableView<Grupo> tblGroup;
 	@FXML TableColumn<Grupo, String> clnGroupNome, clnGroupObservacao;
@@ -122,7 +122,7 @@ public class UsuariosGruposController implements Initializable{
 		ObservableList<Grupo> data = FXCollections.observableList(lstGrupo);
         tblGroup.setItems(data);
 	}
-
+	
 	public void AtualizarTblUser(){
 		clnUserNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomecompleto"));
 		clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));

@@ -25,7 +25,6 @@
 <fullyQualifiedTypeName name="javafx.scene.control.TableView"/>
 <fullyQualifiedTypeName name="javafx.scene.control.TableColumn"/>
 <fullyQualifiedTypeName name="javafx.scene.control.cell.PropertyValueFactory"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="javafx.collections.ObservableList"/>
 <fullyQualifiedTypeName name="javafx.collections.FXCollections"/>
 <fullyQualifiedTypeName name="java.util.List"/>
@@ -41,4 +40,5 @@
 <fullyQualifiedTypeName name="br.com.onpecas.controller.UserController"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Usuario"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Grupo"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
