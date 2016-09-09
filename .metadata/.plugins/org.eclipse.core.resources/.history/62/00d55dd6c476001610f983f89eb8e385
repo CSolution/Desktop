@@ -3,7 +3,6 @@ package br.com.onpecas.view;
 import java.io.IOException;
 
 import br.com.onpecas.controller.*;
-import br.com.onpecas.helper.CallScene;
 import br.com.onpecas.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,6 @@ public class CSOPControllerUsers extends Application {
 
 	BorderPane border;
 	Stage primaryStage;
-	
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {

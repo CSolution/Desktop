@@ -85,7 +85,7 @@ public class CSOPControllerUsers extends Application {
 		}
 	}
 	
-	public void LoadPermission(){
+	/*public void LoadPermission(){
 
 		Stage secondStage = new Stage();
 
@@ -104,7 +104,7 @@ public class CSOPControllerUsers extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/*Esse método serve para carregar a tela que insere e atualiza grupo
 	 * Ela recebe um objeto do tipo grupo,
