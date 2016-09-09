@@ -39,11 +39,13 @@ public class GrupoController implements Initializable {
 	//Terá a opção de instanciar dois modelos da classe
 	//O primeiro modelo só será passado o Stage, para que possa ser fechado depois
 	public GrupoController(Stage myStage) {
+		// TODO Auto-generated constructor stub
 		this.myStage = myStage;
 	}
 
 	//O segundo é passado, alem do stage, um objeto do tipo Grupo, para ser usado na edição
 	public GrupoController(Stage myStage, Grupo grupo) {
+		// TODO Auto-generated constructor stub
 		this.myStage = myStage;
 		this.grupo = grupo;
 		//PrepararUpdate(grupo);
@@ -55,13 +57,7 @@ public class GrupoController implements Initializable {
 		btnCancelar.setOnAction(l-> myStage.close());
 	}
 
-	/* Método utilizado tanto para inserir quanto para atualizar um grupo
-	 * Esse método funciona da seguinte forma:
-	 * Quando o GrupoController é chamado, mas na sua instancia é passada somente o Stage, quer dizer que esse método irá inserir um registro
-	 * Se na instancia é passada, além do Stage, um objeto do tipo Grupo, quer dizer que esse método irá atualizar um registro
-	 * PS: O nome do botão definirá como o método irá agir
-	 * */
-
+	//Metodo para se comunicar com a classe model e inserir os dados no banco
 	public void InserirAtualizarGrupo(){
 		String nome = txtNome.getText();
 		String descricao = txtDescricao.getText();

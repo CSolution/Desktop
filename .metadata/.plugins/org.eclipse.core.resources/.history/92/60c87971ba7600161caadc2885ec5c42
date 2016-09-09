@@ -33,7 +33,7 @@ public class UserController implements Initializable{
 		//cboGrupo.getItems().addAll(Grupo.Select());
 
 		//Foi criado um objeto do tipo grupo, caso ele seja nulo,
-		//quer dizer que a instancia foi feita pelo primeiro modo
+		//quer dizer que a instancia oi feita pelo primeiro modo
 		if(usuario != null){
 			cboGrupo.getSelectionModel().select(usuario.getGrupo().getOid_grupo());
 
@@ -42,10 +42,12 @@ public class UserController implements Initializable{
 	}
 
 	public UserController(Stage myStage) {
+		// TODO Auto-generated constructor stub
 		this.myStage = myStage;
 	}
 
 	public UserController(Stage myStage, Usuario usuario) {
+		// TODO Auto-generated constructor stub
 		this.myStage = myStage;
 		this.usuario = usuario;
 	}
@@ -94,8 +96,8 @@ public class UserController implements Initializable{
 				}else{
 					Alerta.showError("Não é possível cadastrar", "O usuario precisa de pelo menos login e senha.");
 				}
-			break;
 
+				break;
 			case "Atualizar":
 				if(!login.isEmpty() && !senha.isEmpty()){
 					if(grupo != null){
@@ -118,7 +120,7 @@ public class UserController implements Initializable{
 				}else{
 					Alerta.showError("Não é possível atualizar", "O usuario precisa de pelo menos login e senha.");
 				}
-			break;
+				break;
 		}
 	}
 

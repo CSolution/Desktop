@@ -128,8 +128,8 @@ public class UsuariosGruposController implements Initializable{
 		clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));
 		clnUserGrupo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeGrupo"));
 
-		List<Usuario> lstGrupo =new ArrayList<Usuario>();;
-		//List<Usuario> lstGrupo = Usuario.Select();
+		//List<Usuario> lstGrupo =new ArrayList<Usuario>();;
+		List<Usuario> lstGrupo = Usuario.Select();
 		ObservableList<Usuario> data = FXCollections.observableList(lstGrupo);
         tblUser.setItems(data);
 	}

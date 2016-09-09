@@ -30,10 +30,10 @@ public class UserController implements Initializable{
 		OID_USUARIOAUXILIO = 0;
 		AtribuirBotoes();
 
-		//cboGrupo.getItems().addAll(Grupo.Select());
+		cboGrupo.getItems().addAll(Grupo.Select());
 
 		//Foi criado um objeto do tipo grupo, caso ele seja nulo,
-		//quer dizer que a instancia foi feita pelo primeiro modo
+		//quer dizer que a instancia oi feita pelo primeiro modo
 		if(usuario != null){
 			cboGrupo.getSelectionModel().select(usuario.getGrupo().getOid_grupo());
 
@@ -42,26 +42,20 @@ public class UserController implements Initializable{
 	}
 
 	public UserController(Stage myStage) {
+		// TODO Auto-generated constructor stub
 		this.myStage = myStage;
 	}
 
 	public UserController(Stage myStage, Usuario usuario) {
+		// TODO Auto-generated constructor stub
 		this.myStage = myStage;
 		this.usuario = usuario;
 	}
 
-	/* Método que serve para atribuir os botões às suas respectivas funções*/
 	public void AtribuirBotoes(){
 		btnCadastrar.setOnAction(l-> InserirAtualizarGrupo());
 		btnCancelar.setOnAction(l-> myStage.close());
 	}
-
-	/* Método utilizado tanto para inserir quanto para atualizar um usuario
-	 * Esse método funciona da seguinte forma:
-	 * Quando o UserController é chamado, mas na sua instancia é passada somente o Stage, quer dizer que esse método irá inserir um registro
-	 * Se na instancia é passada, além do Stage, um objeto do tipo User, quer dizer que esse método irá atualizar um registro
-	 * PS: O nome do botão definirá como o método irá agir
-	 * */
 
 	public void InserirAtualizarGrupo(){
 		String nomeCompleto = txtNomeCompleto.getText();
@@ -94,8 +88,8 @@ public class UserController implements Initializable{
 				}else{
 					Alerta.showError("Não é possível cadastrar", "O usuario precisa de pelo menos login e senha.");
 				}
-			break;
 
+				break;
 			case "Atualizar":
 				if(!login.isEmpty() && !senha.isEmpty()){
 					if(grupo != null){
@@ -118,12 +112,10 @@ public class UserController implements Initializable{
 				}else{
 					Alerta.showError("Não é possível atualizar", "O usuario precisa de pelo menos login e senha.");
 				}
-			break;
+				break;
 		}
 	}
 
-	/* Esse método funciona como um passo antes da atualização
-	 * Ele pega o objeto que será atualizado, preenche as caixas de texto com os seus dados e muda o nome do botão para Atualizar*/
 	public void PrepararUpdate(Usuario usuario){
 		txtNomeCompleto.setText(usuario.getNomeCompleto());
 		txtLogin.setText(usuario.getLogin());

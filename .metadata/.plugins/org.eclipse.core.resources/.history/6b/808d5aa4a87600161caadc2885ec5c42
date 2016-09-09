@@ -117,19 +117,16 @@ public class UsuariosGruposController implements Initializable{
 		clnGroupNome.setCellValueFactory(new PropertyValueFactory<Grupo, String>("nome"));
 		clnGroupObservacao.setCellValueFactory(new PropertyValueFactory<Grupo, String>("descricao"));
 
-		lstGrupo = new ArrayList<Grupo>();
-		//lstGrupo = Grupo.Select();
+		lstGrupo = Grupo.Select();
 		ObservableList<Grupo> data = FXCollections.observableList(lstGrupo);
         tblGroup.setItems(data);
 	}
-	
 	public void AtualizarTblUser(){
 		clnUserNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomecompleto"));
 		clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));
 		clnUserGrupo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeGrupo"));
 
-		List<Usuario> lstGrupo =new ArrayList<Usuario>();;
-		//List<Usuario> lstGrupo = Usuario.Select();
+		List<Usuario> lstGrupo = Usuario.Select();
 		ObservableList<Usuario> data = FXCollections.observableList(lstGrupo);
         tblUser.setItems(data);
 	}

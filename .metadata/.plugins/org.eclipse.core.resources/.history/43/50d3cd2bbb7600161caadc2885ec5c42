@@ -24,7 +24,6 @@ public class CSOPControllerUsers extends Application {
 		LoadMain();
 	}
 
-	//Esse método serve para carregar a estrutura de borda do sistema
 	public void LoadBorder() throws IOException{
 
 		FXMLLoader loader = new FXMLLoader();
@@ -38,7 +37,6 @@ public class CSOPControllerUsers extends Application {
 
 	}
 
-	//Esse método serve para carregar a tela inicial do módulo Controle de Usuario
 	public void LoadMain() throws IOException{
 
 		FXMLLoader loader = new FXMLLoader();
@@ -49,11 +47,6 @@ public class CSOPControllerUsers extends Application {
 		border.setCenter(module);
 	}
 
-	/*Esse método serve para carregar a tela que insere e atualiza usuario
-	 * Ela recebe um objeto do tipo Usuario,
-	 * caso o objeto seja nulo, o controller irá inserir, caso contrário, ele irá atualizar
-	 * PS: É criada uma nova tela (Stage)
-	 * */
 	public void LoadUser(Usuario usuario){
 
 		Stage secondStage = new Stage();
@@ -83,11 +76,6 @@ public class CSOPControllerUsers extends Application {
 		}
 	}
 
-	/*Esse método serve para carregar a tela que insere e atualiza grupo
-	 * Ela recebe um objeto do tipo grupo,
-	 * caso o objeto seja nulo, o controller irá inserir, caso contrário, ele irá atualizar
-	 * PS: É criada uma nova tela (Stage)
-	 * */
 	public void LoadGroup(Grupo grupo){
 
 		Stage secondStage = new Stage();
