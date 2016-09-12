@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import br.com.onpecas.model.Grupo;
 import br.com.onpecas.model.Usuario;
+import br.com.onpecas.view.CallScene;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -18,12 +19,15 @@ public class PermissaoController implements Initializable {
 	@FXML Button btnSalvar,btnCancelar;
 	@FXML Label lbGrupo;
 	
+	CallScene scene;
 	Stage myStage;
 	Grupo grupo;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		
+		scene = new CallScene();
 		
 		AtribuirBotoes();
 		lbGrupo.setText(grupo.getNome());
@@ -43,14 +47,17 @@ public class PermissaoController implements Initializable {
 		
 	}
 
-	private Object VoltarTela() {
-		// TODO Auto-generated method stub
-		return null;
+	private void VoltarTela() {
+		
+		myStage.close();
+		
 	}
 
 	private void InsertPermissao() {
 		
 		System.out.println(CMSAcessar.isSelected());
+		
+		VoltarTela();
 		
 	}
 

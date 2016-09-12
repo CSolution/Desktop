@@ -9,12 +9,14 @@ import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.*;
 
-//Classe que irá carregar as telas 
+//Classe que serve para carregar e controlar as telas
 
 public class CallScene {
-	
+
+	/*Esse método serve para carregar a tela de controle de permissões*/
 	public void LoadPermission(Grupo grupo){
 
 		Stage secondStage = new Stage();
@@ -35,7 +37,12 @@ public class CallScene {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/*Esse método serve para carregar a tela que insere e atualiza grupo
+	 * Ela recebe um objeto do tipo grupo,
+	 * caso o objeto seja nulo, o controller irá inserir, caso contrário, ele irá atualizar
+	 * PS: É criada uma nova tela (Stage)
+	 * */
 	public  void LoadGroup(Grupo grupo){
 
 		Stage secondStage = new Stage();
@@ -64,7 +71,12 @@ public class CallScene {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/*Esse método serve para carregar a tela que insere e atualiza usuario
+	 * Ela recebe um objeto do tipo Usuario,
+	 * caso o objeto seja nulo, o controller irá inserir, caso contrário, ele irá atualizar
+	 * PS: É criada uma nova tela (Stage)
+	 * */
 	public void LoadUser(Usuario usuario){
 
 		Stage secondStage = new Stage();
@@ -93,5 +105,17 @@ public class CallScene {
 			e.printStackTrace();
 		}
 	}
-	
+
+
+	//Esse método serve para carregar a tela inicial do módulo Controle de Usuario
+			public void LoadMain(BorderPane border) throws IOException{
+
+				FXMLLoader loader = new FXMLLoader();
+		        loader.setLocation(getClass().getResource("UsuariosGrupos.fxml"));
+		        loader.setController(new UsuariosGruposController());
+
+				ScrollPane module= (ScrollPane) loader.load();
+				border.setCenter(module);
+			}
+
 }

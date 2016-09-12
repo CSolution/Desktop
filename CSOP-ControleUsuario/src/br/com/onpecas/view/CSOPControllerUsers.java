@@ -2,17 +2,15 @@ package br.com.onpecas.view;
 
 import java.io.IOException;
 
-import br.com.onpecas.controller.*;
-import br.com.onpecas.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
 public class CSOPControllerUsers extends Application {
 
+	CallScene scene;
 	BorderPane border;
 	Stage primaryStage;
 
@@ -20,70 +18,27 @@ public class CSOPControllerUsers extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
 
+		scene = new CallScene();
+
 		LoadBorder();
-		LoadMain();
+		scene.LoadMain(this.border);
 
 	}
 
 	//Esse método serve para carregar a estrutura de borda do sistema
-	public void LoadBorder() throws IOException{
+		public void LoadBorder() throws IOException{
 
-		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("PainelPrincipal.fxml"));
+			FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(getClass().getResource("PainelPrincipal.fxml"));
 
-		border = (BorderPane) loader.load();
-        Scene scene = new Scene(border);
+			border = (BorderPane) loader.load();
+	        Scene scene = new Scene(border);
 
-        primaryStage.setScene(scene);
-        primaryStage.show();
+	        primaryStage.setScene(scene);
+	        primaryStage.show();
 
-	}
-
-	//Esse método serve para carregar a tela inicial do módulo Controle de Usuario
-	public void LoadMain() throws IOException{
-
-		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("UsuariosGrupos.fxml"));
-        loader.setController(new UsuariosGruposController());
-
-		ScrollPane module= (ScrollPane) loader.load();
-		border.setCenter(module);
-	}
-
-	/*Esse método serve para carregar a tela que insere e atualiza usuario
-	 * Ela recebe um objeto do tipo Usuario,
-	 * caso o objeto seja nulo, o controller irá inserir, caso contrário, ele irá atualizar
-	 * PS: É criada uma nova tela (Stage)
-	 * */
-	
-
-	/*public void LoadPermission(Grupo grupo){
-
-		Stage secondStage = new Stage();
-
-		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Permissoes.fxml"));
-
-	    loader.setController(new PermissaoController(secondStage, grupo));
-		try {
-			ScrollPane module= (ScrollPane) loader.load();
-
-			Scene scene = new Scene(module);
-
-			secondStage.setScene(scene);
-			secondStage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-	}*/
 
-	/*Esse método serve para carregar a tela que insere e atualiza grupo
-	 * Ela recebe um objeto do tipo grupo,
-	 * caso o objeto seja nulo, o controller irá inserir, caso contrário, ele irá atualizar
-	 * PS: É criada uma nova tela (Stage)
-	 * */
-	
 	public static void main(String[] args) {
 		launch(args);
 	}

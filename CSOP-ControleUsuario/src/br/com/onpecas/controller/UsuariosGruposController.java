@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 
 import br.com.onpecas.helper.Alerta;
 import br.com.onpecas.model.*;
-import br.com.onpecas.view.CSOPControllerUsers;
 import br.com.onpecas.view.CallScene;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -132,7 +131,6 @@ public class UsuariosGruposController implements Initializable{
 		clnGroupNome.setCellValueFactory(new PropertyValueFactory<Grupo, String>("nome"));
 		clnGroupObservacao.setCellValueFactory(new PropertyValueFactory<Grupo, String>("descricao"));
 
-		//lstGrupo = new ArrayList<Grupo>();
 		lstGrupo = Grupo.Select();
 		ObservableList<Grupo> data = FXCollections.observableList(lstGrupo);
         tblGroup.setItems(data);
@@ -143,7 +141,6 @@ public class UsuariosGruposController implements Initializable{
 		clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));
 		clnUserGrupo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeGrupo"));
 
-		//List<Usuario> lstGrupo =new ArrayList<Usuario>();;
 		List<Usuario> lstGrupo = Usuario.Select();
 		ObservableList<Usuario> data = FXCollections.observableList(lstGrupo);
         tblUser.setItems(data);
