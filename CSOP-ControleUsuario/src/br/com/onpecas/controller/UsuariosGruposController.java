@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import br.com.onpecas.helper.Alerta;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CSOPControllerUsers;
+import br.com.onpecas.view.CallScene;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,10 +19,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class UsuariosGruposController implements Initializable{
-
+	
 	@FXML Button btnUserInsert, btnUserDelete, btnUserEdit;
-	@FXML Button btnGroupInsert, btnGroupDelete, btnGroupEdit;
+	@FXML Button btnGroupInsert, btnGroupDelete, btnGroupEdit, btnGroupPermission;
 	@FXML Button btnFiltrar, btnPermissoes;
+
 
 	@FXML TableView<Grupo> tblGroup;
 	@FXML TableColumn<Grupo, String> clnGroupNome, clnGroupObservacao;
@@ -30,15 +32,15 @@ public class UsuariosGruposController implements Initializable{
 
 	@FXML TableView<Usuario> tblUser;
 	@FXML TableColumn<Usuario, String> clnUserNome, clnUserLogin, clnUserGrupo;
-
-	CSOPControllerUsers csop;
+	
 	List<Grupo> lstGrupo;
+	CallScene callscene;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		csop = new CSOPControllerUsers();
 		lstGrupo = new ArrayList<>();
+		callscene = new CallScene();
 
 		AtribuirBotoes();
 		AtualizarTblGroup();
@@ -48,7 +50,7 @@ public class UsuariosGruposController implements Initializable{
 	}
 
 	public void InsertGroup(){
-		csop.LoadGroup(null);
+		callscene.LoadGroup(null);
 	}
 
 	public void DeleteGroup(){
@@ -69,14 +71,14 @@ public class UsuariosGruposController implements Initializable{
 		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
 
 		if(grupo != null){
-			csop.LoadGroup(grupo);
+			callscene.LoadGroup(grupo);
 		}else{
 			Alerta.showError("Erro", "Selecione um usuario.");
 		}
 	}
 
 	public void InsertUser(){
-		csop.LoadUser(null);
+		callscene.LoadUser(null);
 	}
 
 	public void DeleteUser(){
@@ -97,7 +99,7 @@ public class UsuariosGruposController implements Initializable{
 		Usuario usuario = tblUser.getSelectionModel().getSelectedItem();
 
 		if(usuario != null){
-			csop.LoadUser(usuario);
+			callscene.LoadUser(usuario);
 		}else{
 			Alerta.showError("Erro", "Selecione um usuario.");
 		}
@@ -106,6 +108,7 @@ public class UsuariosGruposController implements Initializable{
 		btnGroupInsert.setOnAction(l-> InsertGroup());
 		btnGroupEdit.setOnAction(l-> UpdateGroup());
 		btnGroupDelete.setOnAction(l-> DeleteGroup());
+		btnGroupPermission.setOnAction(l-> Permission());
 
 		btnUserInsert.setOnAction(l-> InsertUser());
 		btnUserEdit.setOnAction(l-> UpdateUser());
@@ -113,12 +116,24 @@ public class UsuariosGruposController implements Initializable{
 
 	}
 
+	private void Permission() {
+		
+		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
+		
+		if(grupo != null){
+			callscene.LoadPermission(grupo);
+    	}else{
+			Alerta.showError("Erro", "Nenhum grupo selecionado");
+		}
+		
+	}
+
 	public void AtualizarTblGroup(){
 		clnGroupNome.setCellValueFactory(new PropertyValueFactory<Grupo, String>("nome"));
 		clnGroupObservacao.setCellValueFactory(new PropertyValueFactory<Grupo, String>("descricao"));
 
-		lstGrupo = new ArrayList<Grupo>();
-		//lstGrupo = Grupo.Select();
+		//lstGrupo = new ArrayList<Grupo>();
+		lstGrupo = Grupo.Select();
 		ObservableList<Grupo> data = FXCollections.observableList(lstGrupo);
         tblGroup.setItems(data);
 	}
@@ -128,8 +143,8 @@ public class UsuariosGruposController implements Initializable{
 		clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));
 		clnUserGrupo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeGrupo"));
 
-		List<Usuario> lstGrupo =new ArrayList<Usuario>();;
-		//List<Usuario> lstGrupo = Usuario.Select();
+		//List<Usuario> lstGrupo =new ArrayList<Usuario>();;
+		List<Usuario> lstGrupo = Usuario.Select();
 		ObservableList<Usuario> data = FXCollections.observableList(lstGrupo);
         tblUser.setItems(data);
 	}

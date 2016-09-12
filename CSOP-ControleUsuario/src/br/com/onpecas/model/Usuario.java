@@ -108,9 +108,10 @@ public class Usuario {
 				grupo.setOid_grupo(rs.getInt("oid_grupo"));
 				grupo.setNome(rs.getString("nome"));
 				grupo.setDescricao(rs.getString("descricao"));
-
-				usuario.setOid_usuario(rs.getInt("oid_usuario"));
+				
 				usuario.setGrupo(grupo);
+				
+				usuario.setOid_usuario(rs.getInt("oid_usuario"));
 				usuario.setNomeCompleto(rs.getString("nomecompleto"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setLogin(rs.getString("login"));
@@ -154,7 +155,7 @@ public class Usuario {
 	public static void Update(Usuario usuario){
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql ="update usuariosistema set nomecompleto = ?, email = ?, login = ?, senha = ?, oid_grupo = ? where oid_grupo = ?;";
+		String sql ="update usuariosistema set nomecompleto = ?, email = ?, login = ?, senha = ?, oid_grupo = ? where oid_usuario = ?;";
 		PreparedStatement parametros;
 
 		try {

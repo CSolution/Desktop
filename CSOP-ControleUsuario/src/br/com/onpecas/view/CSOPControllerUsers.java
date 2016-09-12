@@ -22,6 +22,7 @@ public class CSOPControllerUsers extends Application {
 
 		LoadBorder();
 		LoadMain();
+
 	}
 
 	//Esse método serve para carregar a estrutura de borda do sistema
@@ -54,24 +55,18 @@ public class CSOPControllerUsers extends Application {
 	 * caso o objeto seja nulo, o controller irá inserir, caso contrário, ele irá atualizar
 	 * PS: É criada uma nova tela (Stage)
 	 * */
-	public void LoadUser(Usuario usuario){
+	
+
+	/*public void LoadPermission(Grupo grupo){
 
 		Stage secondStage = new Stage();
 
 		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("UsuarioCRUD.fxml"));
+        loader.setLocation(getClass().getResource("Permissoes.fxml"));
 
-        if(usuario == null){
-
-	        loader.setController(new UserController(secondStage));
-		}else{
-
-	        loader.setController(new UserController(secondStage, usuario));
-		}
-
-		AnchorPane module;
+	    loader.setController(new PermissaoController(secondStage, grupo));
 		try {
-			module = (AnchorPane) loader.load();
+			ScrollPane module= (ScrollPane) loader.load();
 
 			Scene scene = new Scene(module);
 
@@ -81,41 +76,14 @@ public class CSOPControllerUsers extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/*Esse método serve para carregar a tela que insere e atualiza grupo
 	 * Ela recebe um objeto do tipo grupo,
 	 * caso o objeto seja nulo, o controller irá inserir, caso contrário, ele irá atualizar
 	 * PS: É criada uma nova tela (Stage)
 	 * */
-	public void LoadGroup(Grupo grupo){
-
-		Stage secondStage = new Stage();
-
-		FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("GrupoCRUD.fxml"));
-
-		if(grupo == null){
-
-	        loader.setController(new GrupoController(secondStage));
-		}else{
-
-	        loader.setController(new GrupoController(secondStage, grupo));
-		}
-
-		AnchorPane module;
-		try {
-			module = (AnchorPane) loader.load();
-
-			Scene scene = new Scene(module);
-
-			secondStage.setScene(scene);
-			secondStage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
