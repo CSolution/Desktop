@@ -32,18 +32,19 @@
 <fullyQualifiedTypeName name="br.com.onpecas.helper.Alerta"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="javafx.stage.Stage"/>
-<fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
 <fullyQualifiedTypeName name="javafx.fxml.FXML"/>
 <fullyQualifiedTypeName name="javafx.scene.control.ComboBox"/>
 <fullyQualifiedTypeName name="javafx.scene.control.PasswordField"/>
 <fullyQualifiedTypeName name="javafx.scene.control.Button"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.UserController"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Usuario"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Grupo"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="javafx.beans.property.IntegerProperty"/>
-<fullyQualifiedTypeName name="javafx.beans.property.SimpleIntegerProperty"/>
 <fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
+<fullyQualifiedTypeName name="javafx.beans.value.ObservableValue"/>
 <fullyQualifiedTypeName name="br.com.onpecas.helper.Helper"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Grupo"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Permissao"/>
+<fullyQualifiedTypeName name="javafx.beans.property.SimpleIntegerProperty"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
 </qualifiedTypeNameHistroy>

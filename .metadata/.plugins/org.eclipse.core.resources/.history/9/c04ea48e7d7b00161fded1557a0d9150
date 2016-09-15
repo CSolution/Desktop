@@ -7,7 +7,12 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+<<<<<<< HEAD
+import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.Helper;
+=======
 import br.com.onpecas.helper.*;
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
 import javafx.beans.value.ChangeListener;
@@ -77,7 +82,7 @@ public class UsuariosGruposController implements Initializable{
 		    });
 		cboGrupo.getItems().addAll(lstGrupo);
 
-		Helper.AUXGROUP.addListener(new ChangeListener<Object>() {
+		Helper.AUXGRUPO.addListener(new ChangeListener<Object>() {
 		      @Override
 		      public void changed(ObservableValue<?> observableValue, Object oldValue,
 		          Object newValue) {
@@ -169,7 +174,10 @@ public class UsuariosGruposController implements Initializable{
 	}
 
 	private void Permission() {
+<<<<<<< HEAD
+=======
 
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
 
 		if(grupo != null){
@@ -177,6 +185,10 @@ public class UsuariosGruposController implements Initializable{
     	}else{
 			Alerta.showError("Erro", "Nenhum grupo selecionado");
 		}
+<<<<<<< HEAD
+=======
+
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 	}
 
 	public void Filtrar(){

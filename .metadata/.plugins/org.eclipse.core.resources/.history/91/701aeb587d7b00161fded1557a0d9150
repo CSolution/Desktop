@@ -24,20 +24,24 @@ public class PermissaoController implements Initializable {
 	CallScene scene;
 	Stage myStage;
 	Grupo grupo;
-
+<<<<<<< HEAD
+=======
 	Permissao permissao;
 	//variavel que serve para verificar se tem registro do grupo nas permissões
 	Boolean existe;
 
 	int aux;
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
-
+<<<<<<< HEAD
+=======
 		VerificarCheckbox(permissao);
 
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 		scene = new CallScene();
 
 		AtribuirBotoes();
@@ -67,7 +71,10 @@ public class PermissaoController implements Initializable {
 			existe=false;
 		}
 	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 	public void AtribuirBotoes(){
 
 		btnSalvar.setOnAction(l-> InsertPermissao());
@@ -76,8 +83,11 @@ public class PermissaoController implements Initializable {
 	}
 
 	private void VoltarTela() {
-
+<<<<<<< HEAD
+		Helper.AUXGRUPO.setValue(1);
+=======
 		Helper.AUXGROUP.setValue(1);
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 		myStage.close();
 
 	}
@@ -86,6 +96,12 @@ public class PermissaoController implements Initializable {
 	//caso a variavel 'existe' seja false, é inserido um novo registro no banco,caso contrário, é apenas atualizado
 	private void InsertPermissao() {
 
+<<<<<<< HEAD
+		System.out.println(CMSAcessar.isSelected());
+
+		VoltarTela();
+
+=======
 		if(CMSAcessar.isSelected()){
 
 			permissao.setAcs_cms(1);
@@ -117,6 +133,7 @@ public class PermissaoController implements Initializable {
 
 		}
 
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 	}
 
 }
