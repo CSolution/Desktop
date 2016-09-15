@@ -4,11 +4,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.Helper;
 import br.com.onpecas.model.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+//classe de "controller" para usuários
 public class UserController implements Initializable{
 
 	@FXML TextField txtNomeCompleto, txtLogin, txtEmail;
@@ -85,7 +87,7 @@ public class UserController implements Initializable{
 						usuario.setGrupo(grupo);
 
 						Usuario.Insert(usuario);
-
+						Helper.AUXUSER.setValue(1);
 						myStage.close();
 					}else{
 						Alerta.showError("Não é possível cadastrar", "O usuario precisa de um grupo.");
@@ -109,7 +111,7 @@ public class UserController implements Initializable{
 						usuario.setOid_usuario(oid_usuario);
 
 						Usuario.Update(usuario);
-
+						Helper.AUXUSER.setValue(1);
 						myStage.close();
 					}else{
 						Alerta.showError("Não é possível atualizar", "O usuario precisa de um grupo.");

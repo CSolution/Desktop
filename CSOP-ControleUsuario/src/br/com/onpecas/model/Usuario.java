@@ -14,7 +14,7 @@ public class Usuario {
 
 	private int oid_usuario;
 	private Grupo grupo;
-	private String nomecompleto;
+	private String nomeCompleto;
 	private String login;
 	private String senha;
 	private String email;
@@ -34,10 +34,10 @@ public class Usuario {
 		setNomeGrupo(grupo.getNome());
 	}
 	public String getNomeCompleto() {
-		return nomecompleto;
+		return nomeCompleto;
 	}
-	public void setNomeCompleto(String nomecompleto) {
-		this.nomecompleto = nomecompleto;
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
 	}
 	public String getNomeGrupo() {
 		return nomeGrupo;

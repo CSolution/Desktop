@@ -94,16 +94,25 @@ public class Grupo {
 	public static void SelectSearch(Grupo grupo){}
 	public static void Delete(Grupo grupo){
 		Connection con = MySqlConnect.ConectarDb();
+		
+		String sql2 ="delete from permissao_grupo where oid_grupo = ?;";
 
 		String sql ="delete from grupousuario where oid_grupo = ?;";
+	
 
 		PreparedStatement parametros;
 
 		try {
+			parametros = con.prepareStatement(sql2);
+			parametros.setInt(1, grupo.getOid_grupo());
+
+			parametros.executeUpdate();
+			
 			parametros = con.prepareStatement(sql);
 			parametros.setInt(1, grupo.getOid_grupo());
 
 			parametros.executeUpdate();
+			
 			con.close();
 
 			Alerta.showInformation("sucesso", "Deletado com sucesso");

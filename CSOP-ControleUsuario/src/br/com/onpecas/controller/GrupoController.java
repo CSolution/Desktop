@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.Helper;
 import br.com.onpecas.model.Grupo;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+//Classe de "controller" para grupos de usuários
 public class GrupoController implements Initializable {
 
 	@FXML Button btnCadastrarGrupo, btnCancelar;
@@ -75,8 +77,8 @@ public class GrupoController implements Initializable {
 					grupo.setNome(nome);
 					grupo.setDescricao(descricao);
 
-					Grupo.Insert(grupo);
-
+					Grupo.Update(grupo);
+					Helper.AUXGROUP.setValue(1);
 					myStage.close();
 
 				}else{
@@ -93,7 +95,7 @@ public class GrupoController implements Initializable {
 					grupo.setOid_grupo(oid_grupo);
 
 					Grupo.Update(grupo);
-
+					Helper.AUXGROUP.setValue(1);
 					myStage.close();
 
 				}else{

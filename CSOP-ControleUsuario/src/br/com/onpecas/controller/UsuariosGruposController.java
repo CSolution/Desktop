@@ -7,9 +7,11 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
-import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.*;
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,8 +19,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+//classe de "controller" que associa o grupo e o usuário
 public class UsuariosGruposController implements Initializable{
-	
+
 	@FXML Button btnUserInsert, btnUserDelete, btnUserEdit;
 	@FXML Button btnGroupInsert, btnGroupDelete, btnGroupEdit, btnGroupPermission;
 	@FXML Button btnFiltrar, btnPermissoes;
@@ -31,7 +34,7 @@ public class UsuariosGruposController implements Initializable{
 
 	@FXML TableView<Usuario> tblUser;
 	@FXML TableColumn<Usuario, String> clnUserNome, clnUserLogin, clnUserGrupo;
-	
+
 	List<Grupo> lstGrupo;
 	CallScene callscene;
 
@@ -45,6 +48,30 @@ public class UsuariosGruposController implements Initializable{
 		AtualizarTblGroup();
 		AtualizarTblUser();
 
+		Helper.AUXGROUP.addListener(new ChangeListener() {
+		      @Override
+		      public void changed(ObservableValue observableValue, Object oldValue,
+		          Object newValue) {
+		    	  int newValuenovo =Integer.parseInt(newValue.toString());
+		    	  if(newValuenovo == 1){
+		    		  AtualizarTblGroup();
+		    		  AtualizarTblUser();
+		    		  Helper.AUXGROUP.setValue(0);
+		    	  }
+		      }
+		    });
+
+		Helper.AUXUSER.addListener(new ChangeListener() {
+		      @Override
+		      public void changed(ObservableValue observableValue, Object oldValue,
+		          Object newValue) {
+		    	  int newValuenovo =Integer.parseInt(newValue.toString());
+		    	  if(newValuenovo == 1){
+		    		  AtualizarTblUser();
+		    		  Helper.AUXUSER.setValue(0);
+		    	  }
+		      }
+		    });
 		cboGrupo.getItems().addAll(lstGrupo);
 	}
 
@@ -116,15 +143,15 @@ public class UsuariosGruposController implements Initializable{
 	}
 
 	private void Permission() {
-		
+
 		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
-		
+
 		if(grupo != null){
 			callscene.LoadPermission(grupo);
     	}else{
 			Alerta.showError("Erro", "Nenhum grupo selecionado");
 		}
-		
+
 	}
 
 	public void AtualizarTblGroup(){
@@ -137,7 +164,7 @@ public class UsuariosGruposController implements Initializable{
 	}
 
 	public void AtualizarTblUser(){
-		clnUserNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomecompleto"));
+		clnUserNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeCompleto"));
 		clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));
 		clnUserGrupo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeGrupo"));
 
