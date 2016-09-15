@@ -7,8 +7,12 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+<<<<<<< HEAD
 import br.com.onpecas.helper.Alerta;
 import br.com.onpecas.helper.Helper;
+=======
+import br.com.onpecas.helper.*;
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
 import javafx.beans.value.ChangeListener;
@@ -20,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+//classe de "controller" que associa o grupo e o usuário
 public class UsuariosGruposController implements Initializable{
 
 	@FXML Button btnUserInsert, btnUserDelete, btnUserEdit;
@@ -51,6 +56,30 @@ public class UsuariosGruposController implements Initializable{
 		AtualizarTblGroup();
 		AtualizarTblUser();
 
+		Helper.AUXGROUP.addListener(new ChangeListener() {
+		      @Override
+		      public void changed(ObservableValue observableValue, Object oldValue,
+		          Object newValue) {
+		    	  int newValuenovo =Integer.parseInt(newValue.toString());
+		    	  if(newValuenovo == 1){
+		    		  AtualizarTblGroup();
+		    		  AtualizarTblUser();
+		    		  Helper.AUXGROUP.setValue(0);
+		    	  }
+		      }
+		    });
+
+		Helper.AUXUSER.addListener(new ChangeListener() {
+		      @Override
+		      public void changed(ObservableValue observableValue, Object oldValue,
+		          Object newValue) {
+		    	  int newValuenovo =Integer.parseInt(newValue.toString());
+		    	  if(newValuenovo == 1){
+		    		  AtualizarTblUser();
+		    		  Helper.AUXUSER.setValue(0);
+		    	  }
+		      }
+		    });
 		cboGrupo.getItems().addAll(lstGrupo);
 
 		Helper.AUXGRUPO.addListener(new ChangeListener<Object>() {
@@ -145,6 +174,10 @@ public class UsuariosGruposController implements Initializable{
 	}
 
 	private void Permission() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
 
 		if(grupo != null){
@@ -152,6 +185,10 @@ public class UsuariosGruposController implements Initializable{
     	}else{
 			Alerta.showError("Erro", "Nenhum grupo selecionado");
 		}
+<<<<<<< HEAD
+=======
+
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 	}
 
 	public void Filtrar(){

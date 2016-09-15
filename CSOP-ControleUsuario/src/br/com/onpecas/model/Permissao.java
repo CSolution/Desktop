@@ -28,10 +28,12 @@ public class Permissao {
 		this.acs_cms = acs_cms;
 	}
 
-	public static void Insert(Permissao permissao){
+	public static void Insert(Permissao permissao,int oid_grupo){
 		Connection con = MySqlConnect.ConectarDb();
 
 		String sql ="insert into permissao (acs_cms) values(?);";
+
+		String sql2="insert into permissao_grupo(Oid_permissao,Oid_grupo) values (?,?);";
 
 		PreparedStatement parametros;
 
@@ -40,6 +42,13 @@ public class Permissao {
 			parametros.setInt(1, permissao.getAcs_cms());
 
 			parametros.executeUpdate();
+
+			parametros = con.prepareStatement(sql2);
+			parametros.setInt(1, permissao.getOid_permissao());
+			parametros.setInt(2, oid_grupo);
+
+			parametros.executeUpdate();
+
 			con.close();
 
 			Alerta.showInformation("sucesso", "Inserido com sucesso");
@@ -49,18 +58,22 @@ public class Permissao {
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
+
+
+
 	}
 
 	public static void Update(Permissao permissao){
 		Connection con = MySqlConnect.ConectarDb();
 
 		String sql ="update permissao set acs_cms = ? where oid_permissao = ?;";
+
 		PreparedStatement parametros;
 
 		try {
 			parametros = con.prepareStatement(sql);
 			parametros.setInt(1, permissao.getAcs_cms());
-			parametros.setInt(6, permissao.getOid_permissao());
+			parametros.setInt(2, permissao.getOid_permissao());
 
 			parametros.executeUpdate();
 			con.close();
@@ -98,33 +111,66 @@ public class Permissao {
 		}
 	}
 
-	public static List<Permissao> Select(){
+	public static Permissao Select(Grupo grupo){
 		Connection con = MySqlConnect.ConectarDb();
 
-		List<Permissao> lstPermissao = new ArrayList<>();
-		String sql = "select * from permissao;";
 
-		try {
+		String sql = "select p.* from permissao p inner join permissao_grupo pg on(p.oid_permissao = pg.oid_permissao) where pg.oid_grupo = "+grupo.getOid_grupo()+";";
+
+		try{
 			ResultSet rs = con.createStatement().executeQuery(sql);
-
+			
+			Permissao permissao = new Permissao();
+			
 			while(rs.next()){
-
-				Permissao permissao = new Permissao();
-
-				permissao.setOid_permissao(rs.getInt("oid_permissao"));
-				permissao.setAcs_cms(rs.getInt("acs_cms"));
-
-				lstPermissao.add(permissao);
+				
+			permissao.setOid_permissao(rs.getInt("oid_permissao"));
+			permissao.setAcs_cms(rs.getInt("acs_cms"));
+			
 			}
-
 			con.close();
-			return lstPermissao;
+			return permissao;
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static boolean Buscar(Grupo grupo){
+		Connection con = MySqlConnect.ConectarDb();
+		
+
+		String sql = "select * from permissao_grupo where oid_grupo = "+grupo.getOid_grupo()+";";
+
+		try {
+			ResultSet rs = con.createStatement().executeQuery(sql);
+			
+			
+			while(rs.next()){
+				
+				if(rs.getRow()== 1){
+					
+					return true;
+				
+				}else{
+					
+					return false;
+					
+				}
+				
+				}
+
+			con.close();
+
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return false;
 	}
 
 }

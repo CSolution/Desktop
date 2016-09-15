@@ -39,6 +39,11 @@
 <fullyQualifiedTypeName name="javafx.scene.control.Button"/>
 <fullyQualifiedTypeName name="br.com.onpecas.controller.UserController"/>
 <fullyQualifiedTypeName name="br.com.onpecas.model.Usuario"/>
-<fullyQualifiedTypeName name="br.com.onpecas.model.Grupo"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javafx.beans.property.IntegerProperty"/>
+<fullyQualifiedTypeName name="javafx.beans.property.SimpleIntegerProperty"/>
+<fullyQualifiedTypeName name="javafx.beans.value.ChangeListener"/>
+<fullyQualifiedTypeName name="br.com.onpecas.helper.Helper"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Grupo"/>
+<fullyQualifiedTypeName name="br.com.onpecas.model.Permissao"/>
 </qualifiedTypeNameHistroy>

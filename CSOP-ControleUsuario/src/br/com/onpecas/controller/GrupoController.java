@@ -13,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+//Classe de "controller" para grupos de usuários
 public class GrupoController implements Initializable {
 
 	@FXML Button btnCadastrarGrupo, btnCancelar;
@@ -76,8 +77,13 @@ public class GrupoController implements Initializable {
 					grupo.setNome(nome);
 					grupo.setDescricao(descricao);
 
+<<<<<<< HEAD
 					Grupo.Insert(grupo);
 					Helper.AUXGRUPO.setValue(1);
+=======
+					Grupo.Update(grupo);
+					Helper.AUXGROUP.setValue(1);
+>>>>>>> ecb5fc161d72d8eb3a71fcbf07fd045a27404313
 					myStage.close();
 
 				}else{
@@ -94,7 +100,7 @@ public class GrupoController implements Initializable {
 					grupo.setOid_grupo(oid_grupo);
 
 					Grupo.Update(grupo);
-
+					Helper.AUXGROUP.setValue(1);
 					myStage.close();
 
 				}else{
