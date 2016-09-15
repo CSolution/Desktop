@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.com.onpecas.helper.Alerta;
+import br.com.onpecas.helper.Helper;
 import br.com.onpecas.model.Grupo;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -76,7 +77,7 @@ public class GrupoController implements Initializable {
 					grupo.setDescricao(descricao);
 
 					Grupo.Insert(grupo);
-
+					Helper.AUXGRUPO.setValue(1);
 					myStage.close();
 
 				}else{

@@ -1,0 +1,7 @@
+package br.com.onpecas.helper;
+
+import javafx.beans.property.IntegerProperty;
+
+public class Helper {
+	public static IntegerProperty AUX;
+}

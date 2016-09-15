@@ -34,12 +34,12 @@
                   <TableColumn fx:id="clnUserGrupo" prefWidth="301.0" resizable="false" text="Grupo" />
                </columns>
             </TableView>
-            <Button fx:id="btnFiltrar" layoutX="897.0" layoutY="145.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="108.0" text="FILTRAR" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="145.0">
+            <Button fx:id="btnFiltrar" layoutX="770.0" layoutY="158.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="72.0" style="-fx-background-image: URL('lupa.png');" text="FILTRAR" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="158.0">
                <font>
-                  <Font size="18.0" />
+                  <Font size="14.0" />
                </font>
             </Button>
-            <TextField layoutX="205.0" layoutY="99.0" prefHeight="25.0" prefWidth="373.0" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="99.0" />
+            <TextField fx:id="txtPesqUser" layoutX="205.0" layoutY="99.0" prefHeight="25.0" prefWidth="373.0" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="99.0" />
             <Label layoutX="30.0" layoutY="98.0" text="Pesquisar Usuario:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="98.0">
                <font>
                   <Font size="18.0" />
@@ -69,12 +69,12 @@
             </Button>
             <Separator layoutY="518.0" prefHeight="18.0" prefWidth="1000.0" AnchorPane.bottomAnchor="264.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <Label layoutX="139.0" layoutY="81.0" />
-            <RadioButton layoutX="205.0" layoutY="131.0" mnemonicParsing="false" text="Nome Completo" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="131.0">
+            <RadioButton fx:id="radioNomeCompleto" layoutX="205.0" layoutY="131.0" mnemonicParsing="false" text="Nome Completo" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="131.0">
                <font>
                   <Font size="18.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="380.0" layoutY="128.0" mnemonicParsing="false" text="Login" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="131.0">
+            <RadioButton fx:id="radioLogin" layoutX="380.0" layoutY="128.0" mnemonicParsing="false" text="Login" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="131.0">
                <font>
                   <Font size="18.0" />
                </font>
@@ -90,6 +90,11 @@
                </cursor>
             </ComboBox>
             <Button fx:id="btnGroupPermission" layoutX="141.0" layoutY="530.0" mnemonicParsing="false" text="Permissões" />
+            <Button fx:id="btnLimparFiltro" layoutX="865.0" layoutY="158.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="121.0" text="LIMPAR FILTRO" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="158.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </content>

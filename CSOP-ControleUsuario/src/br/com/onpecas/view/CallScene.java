@@ -50,6 +50,7 @@ public class CallScene {
 		FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("GrupoCRUD.fxml"));
 
+
 		if(grupo == null){
 
 	        loader.setController(new GrupoController(secondStage));

@@ -1,0 +1,13 @@
+package br.com.onpecas.helper;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+public class Helper {
+	public static IntegerProperty AUX = new SimpleIntegerProperty();
+	public Helper() {
+		// TODO Auto-generated constructor stub
+		
+		AUX.set(0);
+	}
+}

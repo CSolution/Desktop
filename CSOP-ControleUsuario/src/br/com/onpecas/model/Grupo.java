@@ -91,7 +91,7 @@ public class Grupo {
 			return null;
 		}
 	}
-	public static void SelectSearch(Grupo grupo){}
+
 	public static void Delete(Grupo grupo){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -114,6 +114,7 @@ public class Grupo {
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
 	}
+
 	public static void Update(Grupo grupo){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -137,6 +138,35 @@ public class Grupo {
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
-
 	}
+
+	public static void FiltrarGrupo(int grupo, int nomuser, int nome, int login){
+
+		if(nomuser ==1){
+			if(grupo==1){
+				if(nome == 1 && login == 1){
+					/* TEM NOME DE USUARIO, GRUPO SELECIONADO, NOME E LOGIN */
+				}else if(nome == 1){
+					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E NOME */
+				}else if( login == 1){
+					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E LOGIN */
+				}else{
+					/* TEM NOME DE USUARIO E GRUPO SELECIONADO */
+				}
+			}else{
+				/* TEM NOME DE USUARIO SELECIONADO */
+			}
+		} else if(grupo==1){
+			if(nome == 1 && login == 1){
+				/* TEM GRUPO SELECIONADO, NOME E LOGIN */
+			}else if(nome == 1){
+				/* TEM GRUPO SELECIONADO, E NOME */
+			}else if(login == 1){
+				/* TEM GRUPO SELECIONADO E LOGIN */
+			}else{
+				/* TEM GRUPO SELECIONADO */
+			}
+		}
+	}
+
 }

@@ -3,8 +3,8 @@ package br.com.onpecas.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.com.onpecas.model.Grupo;
-import br.com.onpecas.model.Usuario;
+import br.com.onpecas.helper.Helper;
+import br.com.onpecas.model.*;
 import br.com.onpecas.view.CallScene;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,20 +18,20 @@ public class PermissaoController implements Initializable {
 	@FXML CheckBox CMSAcessar;
 	@FXML Button btnSalvar,btnCancelar;
 	@FXML Label lbGrupo;
-	
+
 	CallScene scene;
 	Stage myStage;
 	Grupo grupo;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+
 		scene = new CallScene();
-		
+
 		AtribuirBotoes();
 		lbGrupo.setText(grupo.getNome());
-		
+
 	}
 
 	public PermissaoController(Stage myStage, Grupo grupo) {
@@ -39,26 +39,26 @@ public class PermissaoController implements Initializable {
 		this.grupo = grupo;
 
 	}
-	
+
 	public void AtribuirBotoes(){
-		
+
 		btnSalvar.setOnAction(l-> InsertPermissao());
 		btnCancelar.setOnAction(l-> VoltarTela());
-		
+
 	}
 
 	private void VoltarTela() {
-		
+		Helper.AUXGRUPO.setValue(1);
 		myStage.close();
-		
+
 	}
 
 	private void InsertPermissao() {
-		
+
 		System.out.println(CMSAcessar.isSelected());
-		
+
 		VoltarTela();
-		
+
 	}
 
 }
