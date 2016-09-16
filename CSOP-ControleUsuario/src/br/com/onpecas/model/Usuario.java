@@ -64,6 +64,7 @@ public class Usuario {
 		this.email = email;
 	}
 
+	//Metodo usado para inserir um novo grupo no banco de dados
 	public static void Insert(Usuario usuario){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -90,6 +91,8 @@ public class Usuario {
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
 	}
+
+	//Metodo que retorna todos os grupos do banco de dados
 	public static List<Usuario> Select(){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -113,7 +116,6 @@ public class Usuario {
 
 				usuario.setOid_usuario(rs.getInt("oid_usuario"));
 				usuario.setNomeCompleto(rs.getString("nomecompleto"));
-				System.out.println(usuario.getNomeCompleto());
 				usuario.setEmail(rs.getString("email"));
 				usuario.setLogin(rs.getString("login"));
 				usuario.setSenha(rs.getString("senha"));
@@ -131,6 +133,8 @@ public class Usuario {
 		}
 	}
 	public static void SelectSearch(Usuario usuario){}
+
+	//Metodo usado para excluir um grupo no banco de dados
 	public static void Delete(Usuario usuario){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -153,6 +157,8 @@ public class Usuario {
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
 	}
+
+	//Metodo usado para atualizar um grupo no banco de dados
 	public static void Update(Usuario usuario){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -178,7 +184,35 @@ public class Usuario {
 			e.printStackTrace();
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
-
 	}
 
+	//Método utilizado para filtrar os usuarios que aparecerão na table
+		public static void FiltrarGrupo(int grupo, int nomuser, int nome, int login){
+
+			if(nomuser ==1){
+				if(grupo==1){
+					if(nome == 1 && login == 1){
+						/* TEM NOME DE USUARIO, GRUPO SELECIONADO, NOME E LOGIN */
+					}else if(nome == 1){
+						/* TEM NOME DE USUARIO, GRUPO SELECIONADO E NOME */
+					}else if( login == 1){
+						/* TEM NOME DE USUARIO, GRUPO SELECIONADO E LOGIN */
+					}else{
+						/* TEM NOME DE USUARIO E GRUPO SELECIONADO */
+					}
+				}else{
+					/* TEM NOME DE USUARIO SELECIONADO */
+				}
+			} else if(grupo==1){
+				if(nome == 1 && login == 1){
+					/* TEM GRUPO SELECIONADO, NOME E LOGIN */
+				}else if(nome == 1){
+					/* TEM GRUPO SELECIONADO, E NOME */
+				}else if(login == 1){
+					/* TEM GRUPO SELECIONADO E LOGIN */
+				}else{
+					/* TEM GRUPO SELECIONADO */
+				}
+			}
+		}
 }

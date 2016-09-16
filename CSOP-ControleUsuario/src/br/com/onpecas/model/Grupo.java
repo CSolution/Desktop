@@ -40,6 +40,7 @@ public class Grupo {
 		this.descricao = descricao;
 	}
 
+	//Metodo usado para inserir um novo grupo no banco de dados
 	public static void Insert(Grupo grupo){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -63,6 +64,8 @@ public class Grupo {
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
 	}
+
+	//Metodo que retorna todos os grupos do banco de dados
 	public static List<Grupo> Select(){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -92,13 +95,14 @@ public class Grupo {
 		}
 	}
 
+	//Metodo usado para excluir um grupo no banco de dados
 	public static void Delete(Grupo grupo){
 		Connection con = MySqlConnect.ConectarDb();
-		
+
 		String sql2 ="delete from permissao_grupo where oid_grupo = ?;";
 
 		String sql ="delete from grupousuario where oid_grupo = ?;";
-	
+
 
 		PreparedStatement parametros;
 
@@ -107,23 +111,27 @@ public class Grupo {
 			parametros.setInt(1, grupo.getOid_grupo());
 
 			parametros.executeUpdate();
-			
+
 			parametros = con.prepareStatement(sql);
 			parametros.setInt(1, grupo.getOid_grupo());
 
 			parametros.executeUpdate();
-			
+
 			con.close();
 
 			Alerta.showInformation("sucesso", "Deletado com sucesso");
 			//limpar();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+			if(e.getErrorCode() == 1451){
+				Alerta.showError("Não é possível excluir", "Este grupo possui usuários associados");
+			}else{
+				Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
+			}
 		}
 	}
 
+	//Metodo usado para atualizar um grupo no banco de dados
 	public static void Update(Grupo grupo){
 		Connection con = MySqlConnect.ConectarDb();
 
@@ -148,34 +156,4 @@ public class Grupo {
 			Alerta.showError("Erro", "Ocorreu um erro, tente novamente.");
 		}
 	}
-
-	public static void FiltrarGrupo(int grupo, int nomuser, int nome, int login){
-
-		if(nomuser ==1){
-			if(grupo==1){
-				if(nome == 1 && login == 1){
-					/* TEM NOME DE USUARIO, GRUPO SELECIONADO, NOME E LOGIN */
-				}else if(nome == 1){
-					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E NOME */
-				}else if( login == 1){
-					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E LOGIN */
-				}else{
-					/* TEM NOME DE USUARIO E GRUPO SELECIONADO */
-				}
-			}else{
-				/* TEM NOME DE USUARIO SELECIONADO */
-			}
-		} else if(grupo==1){
-			if(nome == 1 && login == 1){
-				/* TEM GRUPO SELECIONADO, NOME E LOGIN */
-			}else if(nome == 1){
-				/* TEM GRUPO SELECIONADO, E NOME */
-			}else if(login == 1){
-				/* TEM GRUPO SELECIONADO E LOGIN */
-			}else{
-				/* TEM GRUPO SELECIONADO */
-			}
-		}
-	}
-
 }

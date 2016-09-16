@@ -22,212 +22,206 @@ import javafx.scene.control.cell.PropertyValueFactory;
 //classe de "controller" que associa o grupo e o usuário
 public class UsuariosGruposController implements Initializable{
 
-	@FXML Button btnUserInsert, btnUserDelete, btnUserEdit;
-	@FXML Button btnGroupInsert, btnGroupDelete, btnGroupEdit, btnGroupPermission;
-	@FXML Button btnFiltrar, btnPermissoes, btnLimparFiltro;
+    @FXML Button btnUserInsert, btnUserDelete, btnUserEdit;
+    @FXML Button btnGroupInsert, btnGroupDelete, btnGroupEdit, btnGroupPermission;
+    @FXML Button btnFiltrar, btnPermissoes, btnLimparFiltro;
 
 
-	@FXML TableView<Grupo> tblGroup;
-	@FXML TableColumn<Grupo, String> clnGroupNome, clnGroupObservacao;
+    @FXML TableView<Grupo> tblGroup;
+    @FXML TableColumn<Grupo, String> clnGroupNome, clnGroupObservacao;
 
-	@FXML ComboBox<Grupo> cboGrupo;
-	@FXML TextField txtPesqUser;
+    @FXML ComboBox<Grupo> cboGrupo;
+    @FXML TextField txtPesqUser;
 
-	@FXML RadioButton radioNomeCompleto, radioLogin;
+    @FXML RadioButton radioNomeCompleto, radioLogin;
 
-	@FXML TableView<Usuario> tblUser;
-	@FXML TableColumn<Usuario, String> clnUserNome, clnUserLogin, clnUserGrupo;
+    @FXML TableView<Usuario> tblUser;
+    @FXML TableColumn<Usuario, String> clnUserNome, clnUserLogin, clnUserGrupo;
 
-	List<Grupo> lstGrupo;
-	CallScene callscene;
+    List<Grupo> lstGrupo;
+    CallScene callscene;
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		lstGrupo = new ArrayList<>();
-		callscene = new CallScene();
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // TODO Auto-generated method stub
+        lstGrupo = new ArrayList<>();
+        callscene = new CallScene();
 
-		AtribuirBotoes();
-		AtualizarTblGroup();
-		AtualizarTblUser();
+        AtribuirBotoes();
+        AtualizarTblGroup();
+        AtualizarTblUser();
 
-		Helper.AUXGROUP.addListener(new ChangeListener() {
-		      @Override
-		      public void changed(ObservableValue observableValue, Object oldValue,
-		          Object newValue) {
-		    	  int newValuenovo =Integer.parseInt(newValue.toString());
-		    	  if(newValuenovo == 1){
-		    		  AtualizarTblGroup();
-		    		  AtualizarTblUser();
-		    		  Helper.AUXGROUP.setValue(0);
-		    	  }
-		      }
-		    });
+        //Listener para atualizar os dados das table assim que o segundo scene se fecha
+        //Antes de fechar o segundo Scene, o valor da variavel AUXGROUP é mudado, assim o listener irá detectar e atualizar as tables
+        Helper.AUXGROUP.addListener(new ChangeListener<Object>() {
+              @Override
+              public void changed(ObservableValue<?> observableValue, Object oldValue,
+                  Object newValue) {
+                  int newValuenovo =Integer.parseInt(newValue.toString());
+                  if(newValuenovo == 1){
+                      AtualizarTblGroup();
+                      AtualizarTblUser();
+                      Helper.AUXGROUP.setValue(0);
+                  }
+              }
+            });
 
-		Helper.AUXUSER.addListener(new ChangeListener() {
-		      @Override
-		      public void changed(ObservableValue observableValue, Object oldValue,
-		          Object newValue) {
-		    	  int newValuenovo =Integer.parseInt(newValue.toString());
-		    	  if(newValuenovo == 1){
-		    		  AtualizarTblUser();
-		    		  Helper.AUXUSER.setValue(0);
-		    	  }
-		      }
-		    });
-		cboGrupo.getItems().addAll(lstGrupo);
+        //Listener para atualizar os dados da table de usuarios assim que o segundo scene se fecha
+        //Antes de fechar o segundo Scene, o valor da variavel AUXUSER é mudado, assim o listener irá detectar e atualizar a table
+        Helper.AUXUSER.addListener(new ChangeListener<Object>() {
+              @Override
+              public void changed(ObservableValue<?> observableValue, Object oldValue,
+                  Object newValue) {
+                  int newValuenovo =Integer.parseInt(newValue.toString());
+                  if(newValuenovo == 1){
+                      AtualizarTblUser();
+                      Helper.AUXUSER.setValue(0);
+                  }
+              }
+            });
+        cboGrupo.getItems().addAll(lstGrupo);
+    }
 
-		Helper.AUXGROUP.addListener(new ChangeListener<Object>() {
-		      @Override
-		      public void changed(ObservableValue<?> observableValue, Object oldValue,
-		          Object newValue) {
-		    	  int newValuenovo =Integer.parseInt(newValue.toString());
-		    	  if(newValuenovo == 1){
-		    		  AtualizarTblGroup();
-		    	  }
-		      }
-		    });
+    //Método para inserir um novo grupo
+    public void InsertGroup(){
+        callscene.LoadGroup(null);
+    }
 
-		Helper.AUXUSER.addListener(new ChangeListener<Object>() {
-		      @Override
-		      public void changed(ObservableValue<?> observableValue, Object oldValue,
-		          Object newValue) {
-		    	  int newValuenovo =Integer.parseInt(newValue.toString());
-		    	  if(newValuenovo == 1){
-		    		  AtualizarTblUser();
-		    	  }
-		      }
-		    });
-	}
+    //Método para apagar um grupo que foi selecionado na Table, caso o mesmo não seja nulo
+    public void DeleteGroup(){
+        Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
 
-	public void InsertGroup(){
-		callscene.LoadGroup(null);
-	}
-
-	public void DeleteGroup(){
-		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
-
-		int result = JOptionPane.showConfirmDialog(null,"Deseja Excluir ? ","Excluir",JOptionPane.YES_NO_CANCEL_OPTION);
+        int result = JOptionPane.showConfirmDialog(null,"Deseja Excluir ? ","Excluir",JOptionPane.YES_NO_CANCEL_OPTION);
 
         if(result ==JOptionPane.YES_OPTION){
-        	if(grupo != null){
-        		Grupo.Delete(grupo);
-        		AtualizarTblGroup();
-        	}else{
-    			Alerta.showError("Erro", "Nenhum grupo selecionado");
-    		}
+            if(grupo != null){
+                Grupo.Delete(grupo);
+                AtualizarTblGroup();
+            }else{
+                Alerta.showError("Erro", "Nenhum grupo selecionado");
+            }
         }
-	}
-	public void UpdateGroup(){
-		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
+    }
 
-		if(grupo != null){
-			callscene.LoadGroup(grupo);
-		}else{
-			Alerta.showError("Erro", "Selecione um usuario.");
-		}
-	}
+    //Método que chama a tela de atualização de grupo
+    public void UpdateGroup(){
+        Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
 
-	public void InsertUser(){
-		callscene.LoadUser(null);
-	}
+        if(grupo != null){
+            callscene.LoadGroup(grupo);
+        }else{
+            Alerta.showError("Erro", "Selecione um usuario.");
+        }
+    }
 
-	public void DeleteUser(){
-		Usuario usuario = tblUser.getSelectionModel().getSelectedItem();
+    //Método para inserir um novo usuario
+    public void InsertUser(){
+        callscene.LoadUser(null);
+    }
 
-		int result = JOptionPane.showConfirmDialog(null,"Deseja Excluir ? ","Excluir",JOptionPane.YES_NO_CANCEL_OPTION);
+    //Método para apagar um usuario que foi selecionado na Table, caso o mesmo não seja nulo
+    public void DeleteUser(){
+        Usuario usuario = tblUser.getSelectionModel().getSelectedItem();
+
+        //Esse é um optionpane que retorna 1 caso o boãpo sim tenha sido pressionado
+        int result = JOptionPane.showConfirmDialog(null,"Deseja Excluir ? ","Excluir",JOptionPane.YES_NO_CANCEL_OPTION);
 
         if(result ==JOptionPane.YES_OPTION){
-        	if(usuario != null){
-        		Usuario.Delete(usuario);
-        		AtualizarTblUser();
-        	}else{
-    			Alerta.showError("Erro", "Nenhum usuario selecionado");
-    		}
+            if(usuario != null){
+                Usuario.Delete(usuario);
+                AtualizarTblUser();
+            }else{
+                Alerta.showError("Erro", "Nenhum usuario selecionado");
+            }
         }
-	}
-	public void UpdateUser(){
-		Usuario usuario = tblUser.getSelectionModel().getSelectedItem();
+    }
 
-		if(usuario != null){
-			callscene.LoadUser(usuario);
-		}else{
-			Alerta.showError("Erro", "Selecione um usuario.");
-		}
-	}
-	public void AtribuirBotoes(){
-		btnGroupInsert.setOnAction(l-> InsertGroup());
-		btnGroupEdit.setOnAction(l-> UpdateGroup());
-		btnGroupDelete.setOnAction(l-> DeleteGroup());
-		btnGroupPermission.setOnAction(l-> Permission());
+    //Método para atualizar um usuario que foi selecionado na Table, caso o mesmo não seja nulo
+    public void UpdateUser(){
+        Usuario usuario = tblUser.getSelectionModel().getSelectedItem();
 
-		btnUserInsert.setOnAction(l-> InsertUser());
-		btnUserEdit.setOnAction(l-> UpdateUser());
-		btnUserDelete.setOnAction(l-> DeleteUser());
+        if(usuario != null){
+            callscene.LoadUser(usuario);
+        }else{
+            Alerta.showError("Erro", "Selecione um usuario.");
+        }
+    }
 
-		btnLimparFiltro.setOnAction(l-> Filtrar());
-	}
+    //Método de associação de botões com suas respectivas funcionalidades
+    public void AtribuirBotoes(){
+        btnGroupInsert.setOnAction(l-> InsertGroup());
+        btnGroupEdit.setOnAction(l-> UpdateGroup());
+        btnGroupDelete.setOnAction(l-> DeleteGroup());
+        btnGroupPermission.setOnAction(l-> Permission());
 
-	private void Permission() {
+        btnUserInsert.setOnAction(l-> InsertUser());
+        btnUserEdit.setOnAction(l-> UpdateUser());
+        btnUserDelete.setOnAction(l-> DeleteUser());
 
-		Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
+        btnLimparFiltro.setOnAction(l-> Filtrar());
+    }
 
-		if(grupo != null){
-			callscene.LoadPermission(grupo);
-    	}else{
-			Alerta.showError("Erro", "Nenhum grupo selecionado");
-		}
-	}
+    //Metodo que chama a tela de permissões passando o grupo que foi selecionado
+    private void Permission() {
+        Grupo grupo = tblGroup.getSelectionModel().getSelectedItem();
 
-	public void Filtrar(){
-		if(!txtPesqUser.getText().isEmpty()){
-			if(cboGrupo.getSelectionModel().getSelectedItem()!= null){
-				if(radioNomeCompleto.isSelected() && radioLogin.isSelected()){
-					/* TEM NOME DE USUARIO, GRUPO SELECIONADO, NOME E LOGIN */
-				}else if(radioNomeCompleto.isSelected()){
-					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E NOME */
-				}else if(radioLogin.isSelected()){
-					/* TEM NOME DE USUARIO, GRUPO SELECIONADO E LOGIN */
-				}else{
-					/* TEM NOME DE USUARIO E GRUPO SELECIONADO */
-				}
-			}else{
-				/* TEM NOME DE USUARIO SELECIONADO */
-			}
-		} else if(cboGrupo.getSelectionModel().getSelectedItem()!= null){
-			if(radioNomeCompleto.isSelected() && radioLogin.isSelected()){
-				/* TEM GRUPO SELECIONADO, NOME E LOGIN */
-			}else if(radioNomeCompleto.isSelected()){
-				/* TEM GRUPO SELECIONADO, E NOME */
-			}else if(radioLogin.isSelected()){
-				/* TEM GRUPO SELECIONADO E LOGIN */
-			}else{
-				/* TEM GRUPO SELECIONADO */
-			}
-		}else {
-			Alerta.showError("Erro", "Selecione o filtro desejado");
-		}
-	}
-	public void AtualizarTblGroup(){
-		clnGroupNome.setCellValueFactory(new PropertyValueFactory<Grupo, String>("nome"));
-		clnGroupObservacao.setCellValueFactory(new PropertyValueFactory<Grupo, String>("descricao"));
+        if(grupo != null){
+            callscene.LoadPermission(grupo);
+        }else{
+            Alerta.showError("Erro", "Nenhum grupo selecionado");
+        }
+    }
 
-		lstGrupo = Grupo.Select();
-		ObservableList<Grupo> data = FXCollections.observableList(lstGrupo);
+    public void Filtrar(){
+        if(!txtPesqUser.getText().isEmpty()){
+            if(cboGrupo.getSelectionModel().getSelectedItem()!= null){
+                if(radioNomeCompleto.isSelected() && radioLogin.isSelected()){
+                    /* TEM NOME DE USUARIO, GRUPO SELECIONADO, NOME E LOGIN */
+                }else if(radioNomeCompleto.isSelected()){
+                    /* TEM NOME DE USUARIO, GRUPO SELECIONADO E NOME */
+                }else if(radioLogin.isSelected()){
+                    /* TEM NOME DE USUARIO, GRUPO SELECIONADO E LOGIN */
+                }else{
+                    /* TEM NOME DE USUARIO E GRUPO SELECIONADO */
+                }
+            }else{
+                /* TEM NOME DE USUARIO SELECIONADO */
+            }
+        } else if(cboGrupo.getSelectionModel().getSelectedItem()!= null){
+            if(radioNomeCompleto.isSelected() && radioLogin.isSelected()){
+                /* TEM GRUPO SELECIONADO, NOME E LOGIN */
+            }else if(radioNomeCompleto.isSelected()){
+                /* TEM GRUPO SELECIONADO, E NOME */
+            }else if(radioLogin.isSelected()){
+                /* TEM GRUPO SELECIONADO E LOGIN */
+            }else{
+                /* TEM GRUPO SELECIONADO */
+            }
+        }else {
+            Alerta.showError("Erro", "Selecione o filtro desejado");
+        }
+    }
+
+    //Metodo para preencher a Table de grupos com os dados do banco
+    public void AtualizarTblGroup(){
+        clnGroupNome.setCellValueFactory(new PropertyValueFactory<Grupo, String>("nome"));
+        clnGroupObservacao.setCellValueFactory(new PropertyValueFactory<Grupo, String>("descricao"));
+
+        lstGrupo = Grupo.Select();
+        ObservableList<Grupo> data = FXCollections.observableList(lstGrupo);
         tblGroup.setItems(data);
-	}
+    }
 
-	public void AtualizarTblUser(){
-		clnUserNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeCompleto"));
-		clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));
-		clnUserGrupo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeGrupo"));
+    //Metodo para preencher a Table de usuarios com os dados do banco
+    public void AtualizarTblUser(){
+        clnUserNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeCompleto"));
+        clnUserLogin.setCellValueFactory(new PropertyValueFactory<Usuario, String>("login"));
+        clnUserGrupo.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nomeGrupo"));
 
-		List<Usuario> lstUsers = Usuario.Select();
-		ObservableList<Usuario> data = FXCollections.observableList(lstUsers);
+        List<Usuario> lstUsers = Usuario.Select();
+        ObservableList<Usuario> data = FXCollections.observableList(lstUsers);
 
-		System.out.println(data.get(0).getNomeCompleto());
-
-		tblUser.setItems(data);
-	}
+        tblUser.setItems(data);
+    }
 
 }

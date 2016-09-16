@@ -5,7 +5,6 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Alerta {
 
-
 	public static void showWarning(String titulo,
 			String conteudo){
 		Alert alert = new Alert(AlertType.WARNING);

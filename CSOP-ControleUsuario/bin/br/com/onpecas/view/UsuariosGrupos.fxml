@@ -34,7 +34,7 @@
                   <TableColumn fx:id="clnUserGrupo" prefWidth="301.0" resizable="false" text="Grupo" />
                </columns>
             </TableView>
-            <Button fx:id="btnFiltrar" layoutX="770.0" layoutY="158.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="72.0" style="-fx-background-image: URL('lupa.png');" text="FILTRAR" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="158.0">
+            <Button fx:id="btnFiltrar" layoutX="770.0" layoutY="158.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="72.0" text="FILTRAR" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="158.0">
                <font>
                   <Font size="14.0" />
                </font>

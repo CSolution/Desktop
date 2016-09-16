@@ -77,7 +77,7 @@ public class GrupoController implements Initializable {
 					grupo.setNome(nome);
 					grupo.setDescricao(descricao);
 
-					Grupo.Update(grupo);
+					Grupo.Insert(grupo);
 					Helper.AUXGROUP.setValue(1);
 					myStage.close();
 

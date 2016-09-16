@@ -1,8 +1,6 @@
 package br.com.onpecas.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import br.com.onpecas.helper.Helper;
@@ -111,11 +109,7 @@ public class PermissaoController implements Initializable {
 	//Função que seta os valores para a checkbox.
 	public void VerificarCheckbox(Permissao permissao){
 
-		if(permissao.getAcs_cms() == 1){
-
 			CMSAcessar.setSelected(true);
-
-		}
 
 	}
 
