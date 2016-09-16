@@ -30,7 +30,7 @@ public class Permissao {
 
 		String sql ="insert into permissao (acs_cms) values(?);";
 
-		String sql2="update grupousuario set oid_permissao=? where oid_grupo = ?;";
+		String sql2="insert into permissao_grupo(Oid_permissao,Oid_grupo) values (?,?);";
 
 		PreparedStatement parametros;
 

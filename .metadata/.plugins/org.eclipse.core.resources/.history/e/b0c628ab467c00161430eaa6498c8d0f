@@ -30,7 +30,7 @@ public class Permissao {
 
 		String sql ="insert into permissao (acs_cms) values(?);";
 
-		String sql2="update grupousuario set oid_permissao=? where oid_grupo = ?;";
+		String sql2="insert into permissao_grupo(Oid_permissao,Oid_grupo) values (?,?);";
 
 		PreparedStatement parametros;
 
@@ -109,10 +109,10 @@ public class Permissao {
 	}
 
 	public static Permissao Select(Grupo grupo){
-		
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql = "select p.* from permissao p inner join grupousuario pg on(p.oid_permissao = pg.oid_permissao) where pg.oid_grupo = "+grupo.getOid_grupo()+";";
+
+		String sql = "select p.* from permissao p inner join permissao_grupo pg on(p.oid_permissao = pg.oid_permissao) where pg.oid_grupo = "+grupo.getOid_grupo()+";";
 
 		try{
 			ResultSet rs = con.createStatement().executeQuery(sql);
@@ -139,7 +139,7 @@ public class Permissao {
 		Connection con = MySqlConnect.ConectarDb();
 
 
-		String sql = "select * from permissao p inner join grupousuario g on(p.oid_permissao = g.oid_permissao) where oid_grupo = "+grupo.getOid_grupo()+";";
+		String sql = "select * from permissao_grupo where oid_grupo = "+grupo.getOid_grupo()+";";
 
 		try {
 			ResultSet rs = con.createStatement().executeQuery(sql);
@@ -169,5 +169,6 @@ public class Permissao {
 		}
 		return false;
 	}
+
 }
 

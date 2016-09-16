@@ -1,8 +1,6 @@
 package br.com.onpecas.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import br.com.onpecas.helper.Helper;
@@ -36,7 +34,7 @@ public class PermissaoController implements Initializable {
 		// TODO Auto-generated method stub
 
 
-		AtribuirCheckbox(permissao);
+		VerificarCheckbox(permissao);
 
 		scene = new CallScene();
 
@@ -70,7 +68,7 @@ public class PermissaoController implements Initializable {
 
 	public void AtribuirBotoes(){
 
-		btnSalvar.setOnAction(l-> SalvarPermissao());
+		btnSalvar.setOnAction(l-> InsertPermissao());
 		btnCancelar.setOnAction(l-> VoltarTela());
 
 	}
@@ -84,34 +82,35 @@ public class PermissaoController implements Initializable {
 
 
 	//caso a variavel 'existe' seja false, é inserido um novo registro no banco,caso contrário, é apenas atualizado
-	private void SalvarPermissao() {
+	private void InsertPermissao() {
 
-		SetarPermissoes();
+		if(CMSAcessar.isSelected()){
+
+			permissao.setAcs_cms(1);
+
+		}else{
+
+			permissao.setAcs_cms(0);
+
+		}
 
 		if(existe){
 
 			Permissao.Update(permissao);
 
 		}else{
-
 		Permissao.Insert(permissao, grupo.getOid_grupo());
-
 		}
 
 		VoltarTela();
 
 	}
 
-	public void SetarPermissoes(){
+	//Função que seta os valores para a checkbox.
+	public void VerificarCheckbox(Permissao permissao){
 
-		permissao.setAcs_cms(CMSAcessar.isSelected());
-
-	}
-
-	//Função que seta os valores para as checkboxs.
-	public void AtribuirCheckbox(Permissao permissao){
-
-		CMSAcessar.setSelected(permissao.getAcs_cms());
+			CMSAcessar.setSelected(true);
 
 	}
+
 }

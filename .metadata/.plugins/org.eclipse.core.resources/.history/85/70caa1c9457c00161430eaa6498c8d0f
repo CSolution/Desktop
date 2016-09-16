@@ -10,7 +10,7 @@ import br.com.onpecas.helper.MySqlConnect;
 public class Permissao {
 
 	private int Oid_permissao;
-	private boolean acs_cms;
+	private int acs_cms;
 
 	public int getOid_permissao() {
 		return Oid_permissao;
@@ -18,10 +18,10 @@ public class Permissao {
 	public void setOid_permissao(int oid_permissao) {
 		Oid_permissao = oid_permissao;
 	}
-	public boolean getAcs_cms() {
+	public int getAcs_cms() {
 		return acs_cms;
 	}
-	public void setAcs_cms(boolean acs_cms) {
+	public void setAcs_cms(int acs_cms) {
 		this.acs_cms = acs_cms;
 	}
 
@@ -30,13 +30,13 @@ public class Permissao {
 
 		String sql ="insert into permissao (acs_cms) values(?);";
 
-		String sql2="update grupousuario set oid_permissao=? where oid_grupo = ?;";
+		String sql2="insert into permissao_grupo(Oid_permissao,Oid_grupo) values (?,?);";
 
 		PreparedStatement parametros;
 
 		try {
 			parametros = con.prepareStatement(sql);
-			parametros.setBoolean(1, permissao.getAcs_cms());
+			parametros.setInt(1, permissao.getAcs_cms());
 
 			parametros.executeUpdate();
 
@@ -69,7 +69,7 @@ public class Permissao {
 
 		try {
 			parametros = con.prepareStatement(sql);
-			parametros.setBoolean(1, permissao.getAcs_cms());
+			parametros.setInt(1, permissao.getAcs_cms());
 			parametros.setInt(2, permissao.getOid_permissao());
 
 			parametros.executeUpdate();
@@ -109,10 +109,10 @@ public class Permissao {
 	}
 
 	public static Permissao Select(Grupo grupo){
-		
 		Connection con = MySqlConnect.ConectarDb();
 
-		String sql = "select p.* from permissao p inner join grupousuario pg on(p.oid_permissao = pg.oid_permissao) where pg.oid_grupo = "+grupo.getOid_grupo()+";";
+
+		String sql = "select p.* from permissao p inner join permissao_grupo pg on(p.oid_permissao = pg.oid_permissao) where pg.oid_grupo = "+grupo.getOid_grupo()+";";
 
 		try{
 			ResultSet rs = con.createStatement().executeQuery(sql);
@@ -122,7 +122,7 @@ public class Permissao {
 			while(rs.next()){
 
 			permissao.setOid_permissao(rs.getInt("oid_permissao"));
-			permissao.setAcs_cms(rs.getBoolean("acs_cms"));
+			permissao.setAcs_cms(rs.getInt("acs_cms"));
 
 			}
 			con.close();
@@ -139,7 +139,7 @@ public class Permissao {
 		Connection con = MySqlConnect.ConectarDb();
 
 
-		String sql = "select * from permissao p inner join grupousuario g on(p.oid_permissao = g.oid_permissao) where oid_grupo = "+grupo.getOid_grupo()+";";
+		String sql = "select * from permissao_grupo where oid_grupo = "+grupo.getOid_grupo()+";";
 
 		try {
 			ResultSet rs = con.createStatement().executeQuery(sql);
@@ -169,5 +169,5 @@ public class Permissao {
 		}
 		return false;
 	}
-}
 
+}
